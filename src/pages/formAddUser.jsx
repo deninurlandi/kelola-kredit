@@ -32,6 +32,7 @@ export default function AddUser() {
               tanggalTempo: y + '-' + m + '-' + d,
               bunga,
               bayar: '',
+              pinjaman,
               jmlBunga: (pinjaman * bunga) / 100,
               jmlPinjaman: pinjaman + (pinjaman * bunga) / 100,
             },
