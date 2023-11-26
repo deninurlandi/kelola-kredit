@@ -9,10 +9,11 @@ export default function AddUser() {
   const [pinjaman, setPinjaman] = useState('');
   const [bunga, setBunga] = useState(10);
   const [tanggal, setTanggal] = useState('');
+  const [atention, setAtention] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((nama, pinjaman, bunga, tanggal)) {
+    if (nama && pinjaman && bunga && tanggal) {
       const d2 = new Date(tanggal);
       const y = d2.getFullYear();
       const m = d2.getMonth() + 2;
@@ -40,6 +41,10 @@ export default function AddUser() {
         },
       ]);
       localStorage.setItem('data', JSON.stringify(data));
+      setAtention(true);
+      setTimeout(() => {
+        setAtention(false);
+      }, 1500);
     }
     setNama('');
     setPinjaman('');
@@ -70,7 +75,9 @@ export default function AddUser() {
               </label>
               <input
                 type="text"
+                required
                 value={nama}
+                minLength={3}
                 onChange={(e) => setNama(e.target.value)}
                 className="block w-full px-3 py-2 rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
                 id="nama"
@@ -83,9 +90,11 @@ export default function AddUser() {
               </label>
               <input
                 value={pinjaman}
+                required
                 onChange={(e) => setPinjaman(parseInt(e.target.value))}
                 className="block w-full px-3 py-2 rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
                 type="number"
+                min={100000}
                 id="pinjaman"
                 name="pinjaman"
               />
@@ -96,6 +105,7 @@ export default function AddUser() {
               </label>
               <input
                 value={tanggal}
+                required
                 onChange={(e) => setTanggal(e.target.value)}
                 className="block w-full px-3 py-2 rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
                 type="date"
@@ -103,9 +113,9 @@ export default function AddUser() {
                 name="tanggal"
               />
             </div>
-            <div className="flex flex-col mt-3">
+            <div className="flex flex-col mt-3 mb-2">
               <label className="font-medium text-lg" htmlFor="bunga">
-                bunga :
+                Bunga :
               </label>
               <select
                 name="bunga"
@@ -120,7 +130,16 @@ export default function AddUser() {
                 <option value="25">25 %</option>
               </select>
             </div>
-            <button className="shadow-sm shadow-slate-800 font-semibold bg-gradient-to-tl from-lime-300 to-cyan-500  text-white px-3 py-2 mt-7 rounded-md">
+            <div
+              className={`w-full flex justify-center transition-all duration-700 ${
+                atention ? `opacity-100` : `opacity-0`
+              }`}
+            >
+              <div className="w-max bg-green-400 shadow-md shadow-slate-500 mb-2 px-2 text-white rounded-xl">
+                Tambah Nasabah Sukses{' '}
+              </div>
+            </div>
+            <button className="shadow-sm shadow-slate-800 font-semibold bg-gradient-to-tl from-lime-300 to-cyan-500  text-white px-3 py-2 rounded-md">
               Submit
             </button>
           </form>
