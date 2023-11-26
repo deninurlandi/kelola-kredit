@@ -16,12 +16,14 @@ export default function DetailUser() {
   }, [data, parsedId]);
 
   const [open, setOpen] = useState(false);
+  const [atention, setAtention] = useState(false);
 
   const [payNominal, setPayNominal] = useState('');
 
   function handlePayCredit(e) {
     e.preventDefault();
-    if (payNominal && user.detail) {
+    setAtention(false);
+    if (payNominal.length > 5 && user.detail) {
       const index = user.detail.length;
       user.detail[index - 1].bayar = parseInt(payNominal);
       const bunga = user.detail[index - 1].bunga;
@@ -35,10 +37,13 @@ export default function DetailUser() {
         jmlPinjaman: jmlnow + (jmlnow * bunga) / 100,
       });
       localStorage.setItem('data', JSON.stringify(data));
+      setPayNominal('');
+      setOpen(false);
+    } else if (payNominal.length < 6) {
+      setTimeout(() => {
+        setAtention(true);
+      }, 200);
     }
-
-    setPayNominal('');
-    setOpen(false);
   }
 
   return (
@@ -50,7 +55,7 @@ export default function DetailUser() {
               <tr>
                 <td className="font-semibold pr-3">Nama</td>
                 <td className="font-semibold pr-3">:</td>
-                <td>{user.nama}</td>
+                <td className="capitalize">{user.nama}</td>
               </tr>
               <tr>
                 <td className="font-semibold pr-3">Pinjaman</td>
@@ -76,17 +81,21 @@ export default function DetailUser() {
             </tbody>
           </table>
 
-          <table className="border-colapse border border-slate-400">
+          <table className="border-collapse border border-slate-400">
             <thead className="">
               <tr>
-                <th className="px-2 border border-slate-300">Tanggal Tempo</th>
-                <th className="px-2 border border-slate-300">Pinjaman</th>
-                <th className="px-2 border border-slate-300">Bunga</th>
-                <th className="px-2 border border-slate-300">Nominal Bunga</th>
-                <th className="px-2 border border-slate-300">
+                <th className="px-2 border border-slate-300 py-1">
+                  Tanggal Tempo
+                </th>
+                <th className="px-2 border border-slate-300 py-1">Pinjaman</th>
+                <th className="px-2 border border-slate-300 py-1">Bunga</th>
+                <th className="px-2 border border-slate-300 py-1">
+                  Nominal Bunga
+                </th>
+                <th className="px-2 border border-slate-300 py-1">
                   Jumlah Pinjaman
                 </th>
-                <th className="px-2 border border-slate-300">Dibayar</th>
+                <th className="px-2 border border-slate-300 py-1">Dibayar</th>
               </tr>
             </thead>
             <tbody>
@@ -95,34 +104,34 @@ export default function DetailUser() {
                 user.detail.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="border border-slate-300 bg-green-200 text-center px-2">
+                      <td className="border py-1 border-slate-300 bg-green-200 text-center px-2">
                         {item.tanggalTempo}
                       </td>
-                      <td className="border border-slate-300 text-center px-2">
+                      <td className="border py-1 border-slate-300 text-center px-2">
                         Rp.{' '}
                         {item.pinjaman.toLocaleString('id-ID', {
                           styles: 'currency',
                           currency: 'IDR',
                         })}
                       </td>
-                      <td className="border border-slate-300 text-center px-2">
+                      <td className="border py-1 border-slate-300 text-center px-2">
                         {item.bunga} %
                       </td>
-                      <td className="border border-slate-300 text-center px-2">
+                      <td className="border py-1 border-slate-300 text-center px-2">
                         Rp.{' '}
                         {item.jmlBunga.toLocaleString('id-ID', {
                           styles: 'currency',
                           currency: 'IDR',
                         })}
                       </td>
-                      <td className="border border-slate-300 text-center px-2">
+                      <td className="border py-1 border-slate-300 text-center px-2">
                         Rp.{' '}
                         {item.jmlPinjaman.toLocaleString('id-ID', {
                           styles: 'currency',
                           currency: 'IDR',
                         })}
                       </td>
-                      <td className="border border-slate-300 text-center px-2">
+                      <td className="border py-1 border-slate-300 text-center px-2">
                         Rp.{' '}
                         {
                           item.bayar
@@ -139,13 +148,14 @@ export default function DetailUser() {
             </tbody>
           </table>
 
-          <div className="w-full flex justify-center">
+          <div className="relative w-full flex justify-center">
             <button
               onClick={() => setOpen(true)}
               className="mt-5 bg-cyan-400 px-5 py-2 text-white font-bold text-lg rounded-xl"
             >
               Bayar Sekarang
             </button>
+
             <div
               className={`w-full max-w-sm bg-green-900 p-5 bg-opacity-40 rounded-lg ${
                 open ? 'fixed' : 'hidden'
@@ -165,10 +175,21 @@ export default function DetailUser() {
                 <input
                   type="number"
                   name="bayar"
+                  minLength="6"
                   value={payNominal}
                   onChange={(e) => setPayNominal(e.target.value)}
                   className="border border-slate-600 outline-cyan-500 px-3 py-2 rounded-xl"
                 />
+                <div
+                  className={`mt-2 -mb-1 justify-center transition-all duration-150 ${
+                    atention ? 'flex' : 'hidden'
+                  }`}
+                >
+                  <div className=" text-red-500 w-44 text-center rounded-lg bg-slate-200">
+                    Minimal Bayar 100.000
+                  </div>
+                </div>
+
                 <div className="w-full flex gap-5 mt-5">
                   <button
                     type="button"

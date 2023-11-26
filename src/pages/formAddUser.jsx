@@ -53,9 +53,9 @@ export default function AddUser() {
   }, [data]);
   return (
     <>
-      <div className="w-full flex justify-center py-7">
-        <div className=" w-full bg-gradient-to-tl p-5 rounded-lg from-slate-500 to-slate-200 max-w-md flex-col flex  items-center">
-          <h2 className=" text-cyan-600 text-2xl font-bold text-center leading-6 mb-4">
+      <div className="w-full sm:min-h-screen flex justify-center items-center">
+        <div className=" w-full min-h-screen sm:min-h-min bg-gradient-to-tl p-5 rounded-lg from-slate-500 to-slate-200 sm:max-w-md flex-col flex  items-center">
+          <h2 className=" text-cyan-600 text-3xl font-bold text-center leading-8 mb-4">
             Masukan Data Nasabah <br></br> Dalam Form Berikut
           </h2>
 
@@ -72,7 +72,7 @@ export default function AddUser() {
                 type="text"
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
-                className="border px-3 py-1 outline-cyan-400 rounded-md border-slate-700"
+                className="block w-full px-3 py-2 rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
                 id="nama"
                 name="nama"
               />
@@ -84,7 +84,7 @@ export default function AddUser() {
               <input
                 value={pinjaman}
                 onChange={(e) => setPinjaman(parseInt(e.target.value))}
-                className="border px-3 py-1 outline-cyan-400 rounded-md border-slate-700"
+                className="block w-full px-3 py-2 rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
                 type="number"
                 id="pinjaman"
                 name="pinjaman"
@@ -97,7 +97,7 @@ export default function AddUser() {
               <input
                 value={tanggal}
                 onChange={(e) => setTanggal(e.target.value)}
-                className="border px-3 py-1 outline-cyan-400 rounded-md border-slate-700"
+                className="block w-full px-3 py-2 rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
                 type="date"
                 id="tanggal"
                 name="tanggal"
@@ -112,7 +112,7 @@ export default function AddUser() {
                 value={bunga}
                 onChange={(e) => setBunga(e.target.value)}
                 id="bunga"
-                className="border px-3 py-2 outline-cyan-400 rounded-md border-slate-700"
+                className="block w-full px-3 py-[11px] rounded-lg border border-slate-500 font-medium text-base text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:text-slate-900"
               >
                 <option value="10">10 %</option>
                 <option value="15">15 %</option>
