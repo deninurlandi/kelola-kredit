@@ -40,11 +40,7 @@ export default function DetailUser() {
               <tr>
                 <td className="font-semibold pr-3">Tanggal Pinjaman</td>
                 <td className="font-semibold pr-3">:</td>
-                <td>
-                  {user.detail && user.detail.length > 0
-                    ? user.detail[0].tanggal
-                    : 'Tanggal tidak tersedia'}
-                </td>
+                <td>{user.tanggal}</td>
               </tr>
               <tr>
                 <td className="font-semibold pr-3">Bunga</td>
@@ -57,7 +53,7 @@ export default function DetailUser() {
           <table className="border-colapse border border-slate-400">
             <thead className="">
               <tr>
-                <th className="px-2 border border-slate-300">Tanggal</th>
+                <th className="px-2 border border-slate-300">Tanggal Tempo</th>
                 <th className="px-2 border border-slate-300">Pinjaman</th>
                 <th className="px-2 border border-slate-300">Bunga</th>
                 <th className="px-2 border border-slate-300">Nominal Bunga</th>
@@ -73,8 +69,8 @@ export default function DetailUser() {
                 user.detail.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="border border-slate-300 text-center px-2">
-                        {item.tanggal}
+                      <td className="border border-slate-300 bg-green-200 text-center px-2">
+                        {item.tanggalTempo}
                       </td>
                       <td className="border border-slate-300 text-center px-2">
                         Rp.{' '}
@@ -108,6 +104,12 @@ export default function DetailUser() {
                 })}
             </tbody>
           </table>
+
+          <div className="w-full flex justify-center">
+            <button className="mt-5 bg-cyan-400 px-5 py-2 text-white font-bold text-lg rounded-xl">
+              Bayar Sekarang
+            </button>
+          </div>
         </div>
       </div>
     </>

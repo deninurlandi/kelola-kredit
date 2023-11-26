@@ -13,17 +13,23 @@ export default function AddUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if ((nama, pinjaman, bunga, tanggal)) {
+      const d2 = new Date(tanggal);
+      const y = d2.getFullYear();
+      const m = d2.getMonth() + 2;
+      const d = d2.getDate();
+
       setData([
         ...data,
         {
           nama,
           id: data.length + 1,
           pinjaman,
+          tanggal,
           bunga,
           status: false,
           detail: [
             {
-              tanggal,
+              tanggalTempo: y + '-' + m + '-' + d,
               bunga,
               bayar: '',
               jmlBunga: (pinjaman * bunga) / 100,

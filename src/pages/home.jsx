@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function Home() {
   return (
     <>
-      <div className="relative w-full p-6 py-16 flex flex-col items-center bg-cyan-300 rounded-b-3xl">
+      <div className="relative w-full p-6 py-16 flex flex-col items-center bg-cyan-300 rounded-b-[40px]">
         <h1 className="text-3xl font-bold">Hallo Brother</h1>
         <h2 className="text-xl font-medium">
           Mari kelola bisnis kreditmu disini
