@@ -19,32 +19,60 @@ export default function DetailUser() {
   const [atention, setAtention] = useState(false);
 
   const [payNominal, setPayNominal] = useState('');
+  const [batas, setBatas] = useState(0);
+  const [sisa, setSisa] = useState(0);
 
   function handlePayCredit(e) {
     e.preventDefault();
     setAtention(false);
-    if (payNominal.length > 5 && user.detail) {
+    if (payNominal.length > 4 && user.detail) {
       const index = user.detail.length;
       user.detail[index - 1].bayar = parseInt(payNominal);
       const bunga = user.detail[index - 1].bunga;
       const jmlnow = user.detail[index - 1].jmlPinjaman - payNominal;
+      setSisa(jmlnow);
 
-      user.detail.push({
-        tanggalTempo: '',
-        bunga: bunga,
-        pinjaman: jmlnow,
-        jmlBunga: (jmlnow * bunga) / 100,
-        jmlPinjaman: jmlnow + (jmlnow * bunga) / 100,
-      });
-      localStorage.setItem('data', JSON.stringify(data));
-      setPayNominal('');
-      setOpen(false);
-    } else if (payNominal.length < 6) {
+      const d2 = new Date(user.detail[index - 1].tanggalTempo);
+      const y = d2.getFullYear();
+      const m = d2.getMonth() + 2;
+      const d = d2.getDate();
+      console.log(y, m, d);
+      const tanggal =
+        m > 12 ? y + 1 + '-' + 1 + '-' + d : y + '-' + m + '-' + d;
+      if (jmlnow > 0) {
+        user.detail.push({
+          tanggalTempo: tanggal,
+          bunga: bunga,
+          pinjaman: jmlnow,
+          jmlBunga: (jmlnow * bunga) / 100,
+          jmlPinjaman: jmlnow + (jmlnow * bunga) / 100,
+        });
+        localStorage.setItem('data', JSON.stringify(data));
+        setPayNominal('');
+        setOpen(false);
+      } else {
+        setPayNominal('');
+        setOpen(false);
+        localStorage.setItem('data', JSON.stringify(data));
+        return user;
+      }
+    } else if (payNominal.length < 5) {
       setTimeout(() => {
         setAtention(true);
       }, 200);
     }
   }
+
+  useEffect(() => {
+    if (user.detail) {
+      setBatas(user.detail[user.detail.length - 1].jmlPinjaman);
+      setSisa(
+        user.detail[user.detail.length - 1].jmlPinjaman -
+          user.detail[user.detail.length - 1].bayar,
+      );
+    }
+  }, [user, payNominal]);
+  console.log(batas);
 
   return (
     <>
@@ -55,12 +83,12 @@ export default function DetailUser() {
               <tr>
                 <td className="font-semibold pr-3">Nama</td>
                 <td className="font-semibold pr-3">:</td>
-                <td className="capitalize">{user.nama}</td>
+                <td className="capitalize font-semibold">{user.nama}</td>
               </tr>
               <tr>
                 <td className="font-semibold pr-3">Pinjaman</td>
-                <td className="font-semibold pr-3">:</td>
-                <td>
+                <td className="font-semibold pr-3 ">:</td>
+                <td className="font-bold">
                   Rp.{' '}
                   {parseInt(user.pinjaman).toLocaleString('id-ID', {
                     styles: 'currency',
@@ -84,18 +112,24 @@ export default function DetailUser() {
           <table className="border-collapse border border-slate-400">
             <thead className="">
               <tr>
-                <th className="px-2 border border-slate-300 py-1">
+                <th className="px-2 border border-slate-300 py-1 bg-cyan-200">
                   Tanggal Tempo
                 </th>
-                <th className="px-2 border border-slate-300 py-1">Pinjaman</th>
-                <th className="px-2 border border-slate-300 py-1">Bunga</th>
-                <th className="px-2 border border-slate-300 py-1">
+                <th className="px-2 border border-slate-300 py-1 bg-cyan-200">
+                  Pokok
+                </th>
+                <th className="px-2 border border-slate-300 py-1 bg-cyan-200">
+                  Bunga
+                </th>
+                <th className="px-2 border border-slate-300 py-1 bg-cyan-200">
                   Nominal Bunga
                 </th>
-                <th className="px-2 border border-slate-300 py-1">
+                <th className="px-2 border border-slate-300 py-1 bg-cyan-200">
                   Jumlah Pinjaman
                 </th>
-                <th className="px-2 border border-slate-300 py-1">Dibayar</th>
+                <th className="px-2 border border-slate-300 py-1 bg-cyan-200">
+                  Dibayar
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +138,7 @@ export default function DetailUser() {
                 user.detail.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="border py-1 border-slate-300 bg-green-200 text-center px-2">
+                      <td className="border py-1 border-slate-300 text-center px-2">
                         {item.tanggalTempo}
                       </td>
                       <td className="border py-1 border-slate-300 text-center px-2">
@@ -132,26 +166,40 @@ export default function DetailUser() {
                         })}
                       </td>
                       <td className="border py-1 border-slate-300 text-center px-2">
-                        Rp.{' '}
                         {
                           item.bayar
-                            ? item.bayar.toLocaleString('id-ID', {
+                            ? 'Rp. ' +
+                              item.bayar.toLocaleString('id-ID', {
                                 styles: 'currency',
                                 currency: 'IDR',
                               })
-                            : '-' // Gantilah pesan ini dengan pesan yang sesuai untuk nilai kosong
+                            : '' // Gantilah pesan ini dengan pesan yang sesuai untuk nilai kosong
                         }
                       </td>
                     </tr>
                   );
                 })}
+
+              {sisa === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="text-2xl font-bold font-serif tracking-[10px] text-center bg-green-300"
+                  >
+                    Pinjaman Lunas
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
 
           <div className="relative w-full flex justify-center">
             <button
               onClick={() => setOpen(true)}
-              className="mt-5 bg-cyan-400 px-5 py-2 text-white font-bold text-lg rounded-xl"
+              disabled={sisa === 0}
+              className={`mt-5 bg-cyan-400 shadow-lg shadow-slate-300 px-5 py-2 text-white font-bold text-lg rounded-xl ${
+                sisa === 0 ? 'cursor-not-allowed opacity-60' : ''
+              }`}
             >
               Bayar Sekarang
             </button>
@@ -161,6 +209,12 @@ export default function DetailUser() {
                 open ? 'fixed' : 'hidden'
               }`}
             >
+              <div className="flex justify-center">
+                <div className="text-center text-lg font-semibold text-red-600 bg-white w-max px-2 py-1 rounded-lg shadow-md mb-3">
+                  Kewajiban : Rp. {batas.toLocaleString('id-ID')}
+                </div>
+              </div>
+              <hr className="border-2 border-cyan-700" />
               <form
                 action=""
                 className="flex flex-col"
@@ -175,7 +229,8 @@ export default function DetailUser() {
                 <input
                   type="number"
                   name="bayar"
-                  minLength="6"
+                  max={batas}
+                  min={batas < 200000 ? batas : 100000}
                   value={payNominal}
                   onChange={(e) => setPayNominal(e.target.value)}
                   className="border border-slate-600 outline-cyan-500 px-3 py-2 rounded-xl"

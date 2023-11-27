@@ -8,6 +8,7 @@ import DataUserContextProvider from './context/dataUser.jsx';
 import AddUser from './pages/formAddUser.jsx';
 import Nasabah from './pages/daftar nasabah.jsx';
 import DetailUser from './pages/detailUser.jsx';
+import CardUser from './componen/fragment/cardUser.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/detailUser/:id',
     element: <DetailUser />,
+  },
+  {
+    path: '/cardUser',
+    element: <CardUser />,
   },
 ]);
 
