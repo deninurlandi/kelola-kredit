@@ -8,7 +8,9 @@ import DataUserContextProvider from './context/dataUser.jsx';
 import AddUser from './pages/formAddUser.jsx';
 import Nasabah from './pages/daftar nasabah.jsx';
 import DetailUser from './pages/detailUser.jsx';
-import CardUser from './componen/fragment/cardUser.jsx';
+import NavLeft from './componen/fragment/navleft.jsx';
+import Dashboard from './componen/fragment/dashboard.jsx';
+import HomeBeta from './pages/homebeta.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,8 +30,16 @@ const router = createBrowserRouter([
     element: <DetailUser />,
   },
   {
-    path: '/cardUser',
-    element: <CardUser />,
+    path: '/navbar',
+    element: <NavLeft />,
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
+  },
+  {
+    path: '/homeBeta',
+    element: <HomeBeta />,
   },
 ]);
 

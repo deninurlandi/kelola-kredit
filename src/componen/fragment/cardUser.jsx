@@ -5,7 +5,7 @@ export default function CardUser(props) {
   const { initial, nama, pinjaman, sisaAngsuran, jatem, id } = props;
   return (
     <>
-      <div className="w-full max-w-2xl p-4 rounded-lg border border-slate-400 bg-gradient-to-bl from-cyan-300 to-pink-300 shadow-md ">
+      <div className="w-full max-w-2xl p-4 shadow-slate-300 rounded-3xl border border-slate-400 bg-gradient-to-bl from-cyan-300 to-pink-300 shadow-md ">
         <div className="">
           <div className="flex gap-4 items-center">
             <div className="w-24 h-24 bg-slate-400 rounded-full flex items-center justify-center text-6xl font-bold text-sky-600 border shadow-md capitalize">

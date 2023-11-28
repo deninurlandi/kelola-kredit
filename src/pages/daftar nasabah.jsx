@@ -10,7 +10,7 @@ export default function Nasabah() {
 
   return (
     <>
-      <div className="w-full py-10 flex flex-col items-center gap-2">
+      <div className="w-full p-2 sm:p-5 flex flex-col items-center gap-2">
         {data.map((item, index) => {
           return (
             <CardUser
