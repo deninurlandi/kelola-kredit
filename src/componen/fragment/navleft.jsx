@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function NavLeft() {
   return (
     <>
@@ -18,32 +20,35 @@ export default function NavLeft() {
             </div>
           </div>
           <div className=" flex flex-col gap-3">
-            <div className="px-4 py-2 flex gap-3 items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="Layer_1"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                className="w-5 fill-white"
-              >
-                <path d="m16,22v2h-8v-2c0-2.206,1.794-4,4-4s4,1.794,4,4Zm-4-14c-1.103,0-2,.897-2,2s.897,2,2,2,2-.897,2-2-.897-2-2-2Zm12,1.685v9.315c0,2.757-2.243,5-5,5h-1v-2c0-3.309-2.691-6-6-6s-6,2.691-6,6v2h-1c-2.757,0-5-2.243-5-5v-9.315c0-1.664.823-3.214,2.203-4.146L9.203.815c1.699-1.146,3.895-1.146,5.594,0l7,4.724c1.38.932,2.203,2.481,2.203,4.146Zm-8,.315c0-2.206-1.794-4-4-4s-4,1.794-4,4,1.794,4,4,4,4-1.794,4-4Z" />
-              </svg>
-              <h2 className="text-white text-base">Dashboard</h2>
-            </div>
-            <div className="px-4 py-2 flex gap-3 items-center">
-              <svg
-                id="Layer_1"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                data-name="Layer 1"
-                className="w-5 fill-white"
-              >
-                <path d="m16 .3a4.968 4.968 0 0 1 1.879 1.164l1.656 1.658a4.954 4.954 0 0 1 1.165 1.878h-4.7zm5 6.7v12a5.006 5.006 0 0 1 -5 5h-8a5.006 5.006 0 0 1 -5-5v-14a5.006 5.006 0 0 1 5-5h6v5a2 2 0 0 0 2 2zm-4.192 10.413a1 1 0 0 0 -1.4-.222 4.586 4.586 0 0 1 -2.273.809 1.347 1.347 0 0 1 -.864-.345 3.025 3.025 0 0 0 -1.832-.655 5.861 5.861 0 0 0 -3.046 1.206 1 1 0 1 0 1.214 1.588 3.951 3.951 0 0 1 1.832-.794c.246 0 .371.078.7.3a3.252 3.252 0 0 0 2 .7 6.464 6.464 0 0 0 3.456-1.193 1 1 0 0 0 .213-1.394zm.192-3.413a1 1 0 0 0 -1-1h-8a1 1 0 0 0 0 2h8a1 1 0 0 0 1-1zm0-4a1 1 0 0 0 -1-1h-8a1 1 0 0 0 0 2h8a1 1 0 0 0 1-1z" />
-              </svg>
-              <h2 className="text-white text-base">Daftar Nasabah</h2>
-            </div>
-
-            <div className="px-4 py-2 flex gap-3 items-center">
+            <Link to={'/homeBeta'}>
+              <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="Layer_1"
+                  data-name="Layer 1"
+                  viewBox="0 0 24 24"
+                  className="w-5 fill-white"
+                >
+                  <path d="m16,22v2h-8v-2c0-2.206,1.794-4,4-4s4,1.794,4,4Zm-4-14c-1.103,0-2,.897-2,2s.897,2,2,2,2-.897,2-2-.897-2-2-2Zm12,1.685v9.315c0,2.757-2.243,5-5,5h-1v-2c0-3.309-2.691-6-6-6s-6,2.691-6,6v2h-1c-2.757,0-5-2.243-5-5v-9.315c0-1.664.823-3.214,2.203-4.146L9.203.815c1.699-1.146,3.895-1.146,5.594,0l7,4.724c1.38.932,2.203,2.481,2.203,4.146Zm-8,.315c0-2.206-1.794-4-4-4s-4,1.794-4,4,1.794,4,4,4,4-1.794,4-4Z" />
+                </svg>
+                <h2 className="text-white text-base">Dashboard</h2>
+              </div>
+            </Link>
+            <Link to={'/daftarNasBeta'}>
+              <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+                <svg
+                  id="Layer_1"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-name="Layer 1"
+                  className="w-5 fill-white"
+                >
+                  <path d="m16 .3a4.968 4.968 0 0 1 1.879 1.164l1.656 1.658a4.954 4.954 0 0 1 1.165 1.878h-4.7zm5 6.7v12a5.006 5.006 0 0 1 -5 5h-8a5.006 5.006 0 0 1 -5-5v-14a5.006 5.006 0 0 1 5-5h6v5a2 2 0 0 0 2 2zm-4.192 10.413a1 1 0 0 0 -1.4-.222 4.586 4.586 0 0 1 -2.273.809 1.347 1.347 0 0 1 -.864-.345 3.025 3.025 0 0 0 -1.832-.655 5.861 5.861 0 0 0 -3.046 1.206 1 1 0 1 0 1.214 1.588 3.951 3.951 0 0 1 1.832-.794c.246 0 .371.078.7.3a3.252 3.252 0 0 0 2 .7 6.464 6.464 0 0 0 3.456-1.193 1 1 0 0 0 .213-1.394zm.192-3.413a1 1 0 0 0 -1-1h-8a1 1 0 0 0 0 2h8a1 1 0 0 0 1-1zm0-4a1 1 0 0 0 -1-1h-8a1 1 0 0 0 0 2h8a1 1 0 0 0 1-1z" />
+                </svg>
+                <h2 className="text-white text-base">Daftar Nasabah</h2>
+              </div>
+            </Link>
+            <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Layer_1"
@@ -57,7 +62,7 @@ export default function NavLeft() {
               </svg>
               <h2 className="text-white text-base">Tambah Nasabah</h2>
             </div>
-            <div className="px-4 py-2 flex gap-3 items-center">
+            <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Isolation_Mode"
@@ -73,7 +78,7 @@ export default function NavLeft() {
           </div>
           <div className="flex mt-5 flex-col gap-3">
             <h2 className="px-4  text-white text-base">Control App</h2>
-            <div className="px-4 py-2 flex items-center gap-3">
+            <div className="px-4 py-2 flex items-center gap-3 hover:bg-[#2e1e5b]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Filled"
@@ -85,7 +90,7 @@ export default function NavLeft() {
               <h2 className="text-white text-base">Tentang App</h2>
             </div>
 
-            <div className="px-4 py-2 flex items-center gap-3">
+            <div className="px-4 py-2 flex items-center gap-3 hover:bg-[#2e1e5b]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Layer_1"
@@ -97,7 +102,7 @@ export default function NavLeft() {
               </svg>
               <h2 className="text-white text-base">Setting App</h2>
             </div>
-            <div className="px-4 py-2 flex items-center gap-3">
+            <div className="px-4 py-2 flex items-center gap-3 hover:bg-[#2e1e5b]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Isolation_Mode"

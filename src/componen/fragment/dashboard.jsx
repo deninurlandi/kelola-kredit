@@ -1,9 +1,12 @@
 export default function Dashboard() {
   return (
     <>
-      <div className=" w-full ">
-        <div className="w-full px-4 pt-2">
-          <div className="flex w-full sm:flex-nowrap flex-wrap gap-4">
+      <div className=" w-full flex h-screen">
+        <div className="w-full px-4 pt-3">
+          <h2 className="text-xl font-[Electrolize] text-white px-4">
+            WELCOME TO DASHBOARD
+          </h2>
+          <div className="flex w-full sm:flex-nowrap flex-wrap gap-4 px-4 pt-3">
             <div className="sm:w-3/5 w-full  flex flex-col gap-4">
               {/* kotak besar */}
               <div className=" w-full h-80 rounded-[4px] bg-teal-400 p-6 px-8">

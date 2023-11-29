@@ -11,6 +11,7 @@ import DetailUser from './pages/detailUser.jsx';
 import NavLeft from './componen/fragment/navleft.jsx';
 import Dashboard from './componen/fragment/dashboard.jsx';
 import HomeBeta from './pages/homebeta.jsx';
+import DaftarNasBeta from './pages/daftarNasBeta.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
     element: <NavLeft />,
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />,
+    path: '/daftarNasBeta',
+    element: <DaftarNasBeta />,
   },
   {
     path: '/homeBeta',

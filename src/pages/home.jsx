@@ -66,6 +66,14 @@ export default function Home() {
               </div>
             </div>
           </Link>
+          <Link to={'/homeBeta'}>
+            <div className="w-24 h-24 rounded-full bg-cyan-500"></div>
+            <div className="mt-2 bg-cyan-500 rounded-md">
+              <h2 className="py-1 text-slate-100 text-center font-medium text-lg leading-5">
+                Versi Beta
+              </h2>
+            </div>
+          </Link>
         </div>
       </div>
     </>

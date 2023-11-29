@@ -1,7 +1,7 @@
 import NavLeft from '../componen/fragment/navleft';
-import Dashboard from '../componen/fragment/dashboard';
+import CardDaftarNas from '../componen/fragment/cardDaftarNas';
 
-export default function HomeBeta() {
+export default function DaftarNasBeta() {
   return (
     <>
       <div className="flex relative">
@@ -9,7 +9,7 @@ export default function HomeBeta() {
           <NavLeft />
         </div>
         <div className="w-full h-screen bg-[#211545] overflow-y-auto">
-          <Dashboard />
+          <CardDaftarNas />
         </div>
         <div className="w-[300px] h-screen hidden xl:block bg-slate-400"></div>
       </div>
