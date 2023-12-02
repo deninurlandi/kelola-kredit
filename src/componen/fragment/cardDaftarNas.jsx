@@ -415,7 +415,15 @@ export default function CardDaftarNas(props) {
                       </div>
                     </td>
                     <td className="py-3">
-                      <div className="bg-orange-500 text-white px-2 py-1 rounded-full text-center bg-opacity-50">
+                      <div
+                        className={`text-white px-2 py-1 rounded-full text-center bg-opacity-50 ${
+                          item.kondisi === 'new'
+                            ? 'bg-emerald-500'
+                            : item.kondisi === 'active'
+                            ? 'bg-sky-500'
+                            : 'bg-cyan-400'
+                        }`}
+                      >
                         {item.kondisi}
                       </div>
                     </td>
@@ -430,12 +438,14 @@ export default function CardDaftarNas(props) {
                     <td className="text-center">{item.bunga} %</td>
                     <td className="text-center">
                       Rp.{' '}
-                      {item.detail[
-                        item.detail.length - 1
-                      ].jmlPinjaman.toLocaleString('id-ID', {
-                        styles: 'currency',
-                        currency: 'IDR',
-                      })}
+                      {item.kondisi === 'Lunas'
+                        ? '-'
+                        : item.detail[
+                            item.detail.length - 1
+                          ].jmlPinjaman.toLocaleString('id-ID', {
+                            styles: 'currency',
+                            currency: 'IDR',
+                          })}
                     </td>
                     <td>
                       <div className="flex gap-2 items-center justify-center">

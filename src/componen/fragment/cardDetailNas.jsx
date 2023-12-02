@@ -45,10 +45,12 @@ export default function CardDetailNas(props) {
           jmlBunga: (jmlnow * bunga) / 100,
           jmlPinjaman: jmlnow + (jmlnow * bunga) / 100,
         });
+        user.kondisi = 'active';
         localStorage.setItem('data', JSON.stringify(data));
         setPayNominal('');
         setPayDate('');
       } else {
+        user.kondisi = 'Lunas';
         setPayNominal('');
         setPayDate('');
 
@@ -120,7 +122,9 @@ export default function CardDetailNas(props) {
           </div>
           <div className="w-full max-w-md p-4 bg-slate-600 rounded-md">
             <p className="px-3 py-1 mb-4 w-max rounded-sm bg-slate-400">
-              Jumlah Wajib Bayar : Rp. {batas.toLocaleString('id-ID')}
+              {sisa === 0
+                ? 'Pinjaman Lunas'
+                : 'Jumlah Wajib Bayar : Rp. ' + batas.toLocaleString('id-ID')}
             </p>
             <div className="mb-4">
               <h2 className="text-lg">Form Bayar Pinjaman</h2>
@@ -132,11 +136,16 @@ export default function CardDetailNas(props) {
                 <input
                   type="number"
                   id="bayar"
+                  max={batas}
+                  min={batas < 200000 ? batas : 100000}
                   value={payNominal}
+                  disabled={sisa === 0}
                   minLength={5}
                   onChange={(e) => setPayNominal(e.target.value)}
                   placeholder="Masukan nomimal bayar"
-                  className="w-full max-w-md p-2 outline-none bg-transparent border rounded-md"
+                  className={`w-full max-w-md p-2 outline-none bg-transparent border rounded-md ${
+                    sisa === 0 ? 'cursor-not-allowed opacity-60' : ''
+                  }`}
                 />
               </div>
               <div className="mb-5">
@@ -145,15 +154,23 @@ export default function CardDetailNas(props) {
                   type="date"
                   id="tanggal"
                   value={payDate}
+                  disabled={sisa === 0}
                   required
                   minLength={5}
                   onChange={(e) => setPayDate(e.target.value)}
                   placeholder="Masukan nomimal bayar"
-                  className="w-full max-w-md p-2 outline-none bg-transparent border rounded-md"
+                  className={`w-full max-w-md p-2 outline-none bg-transparent border rounded-md ${
+                    sisa === 0 ? 'cursor-not-allowed opacity-60' : ''
+                  }`}
                 />
               </div>
               <div>
-                <button className="px-4 py-2 w-full bg-cyan-400 text-lg rounded-lg shadow-sm shadow-slate-200 border border-slate-500">
+                <button
+                  disabled={sisa === 0}
+                  className={`px-4 py-2 w-full bg-cyan-400 text-lg rounded-lg shadow-sm shadow-slate-200 border border-slate-500 ${
+                    sisa === 0 ? 'cursor-not-allowed opacity-60' : ''
+                  }`}
+                >
                   Bayar
                 </button>
               </div>

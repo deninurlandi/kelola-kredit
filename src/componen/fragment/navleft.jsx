@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function NavLeft() {
+  const location = useLocation();
   return (
     <>
       <div className="w-max h-screen bg-[#24154C] opacity-90">
@@ -20,8 +21,12 @@ export default function NavLeft() {
             </div>
           </div>
           <div className=" flex flex-col gap-3">
-            <Link to={'/homeBeta'}>
-              <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+            <Link to={'/'}>
+              <div
+                className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
+                  location.pathname === '/' && 'bg-[#2e1e5b]'
+                }`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="Layer_1"
@@ -34,8 +39,12 @@ export default function NavLeft() {
                 <h2 className="text-white text-base">Dashboard</h2>
               </div>
             </Link>
-            <Link to={'/daftarNasBeta'}>
-              <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+            <Link to={'/daftarnasabah'}>
+              <div
+                className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
+                  location.pathname === '/daftarnasabah' && 'bg-[#2e1e5b]'
+                }`}
+              >
                 <svg
                   id="Layer_1"
                   viewBox="0 0 24 24"
@@ -49,7 +58,11 @@ export default function NavLeft() {
               </div>
             </Link>
             <Link to={'/addnasabah'}>
-              <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+              <div
+                className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
+                  location.pathname === '/addnasabah' && 'bg-[#2e1e5b]'
+                }`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   id="Layer_1"
@@ -64,7 +77,11 @@ export default function NavLeft() {
                 <h2 className="text-white text-base">Tambah Nasabah</h2>
               </div>
             </Link>
-            <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+            <div
+              className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
+                location.pathname === '/riwayat' && 'bg-[#2e1e5b]'
+              }`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Isolation_Mode"

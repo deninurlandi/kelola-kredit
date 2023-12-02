@@ -13,8 +13,8 @@ export default function DaftarNasBeta() {
   useEffect(() => {
     setAll(data.length);
     const filterNew = data.filter((item) => item.kondisi === 'new');
-    const filterAktif = data.filter((item) => item.kondisi === 'aktif');
-    const filterLunas = data.filter((item) => item.kondisi === 'lunas');
+    const filterAktif = data.filter((item) => item.kondisi === 'active');
+    const filterLunas = data.filter((item) => item.kondisi === 'Lunas');
     setLunas(filterLunas.length);
     setBaru(filterNew.length);
     setAktif(filterAktif.length);

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react';
 import { DataUser } from '../../context/dataUser';
+import { Link } from 'react-router-dom';
 
 export default function CardAddNas(props) {
   const { onDelete } = props;
@@ -60,9 +61,9 @@ export default function CardAddNas(props) {
     setJaminan('ktp');
     setNoJaminan('');
   };
+  const list = data.filter((item) => item.kondisi === 'new');
 
   useEffect(() => {
-    console.log(data);
     localStorage.setItem('data', JSON.stringify(data));
   }, [data]);
 
@@ -78,6 +79,7 @@ export default function CardAddNas(props) {
                 <input
                   type="text"
                   id="nama"
+                  required
                   value={nama}
                   minLength={3}
                   onChange={(e) => setNama(e.target.value)}
@@ -101,6 +103,7 @@ export default function CardAddNas(props) {
                 <input
                   type="number"
                   value={pinjaman}
+                  min={200000}
                   required
                   onChange={(e) => setPinjaman(parseInt(e.target.value))}
                   id="pinjaman"
@@ -136,6 +139,7 @@ export default function CardAddNas(props) {
                 <label htmlFor="jaminan">Jaminan :</label>
                 <select
                   name="jaminan"
+                  required
                   value={jaminan}
                   onChange={(e) => setJaminan(e.target.value)}
                   className="bg-transparent outline-none border-b p-1"
@@ -203,7 +207,7 @@ export default function CardAddNas(props) {
                 </thead>
                 <tbody>
                   {/* map ada disini */}
-                  {data.map((item, index) => {
+                  {list.map((item, index) => {
                     return (
                       <tr className="border-b" key={index}>
                         <td className="py-3">
@@ -220,7 +224,15 @@ export default function CardAddNas(props) {
                           </div>
                         </td>
                         <td className="py-3">
-                          <div className="bg-orange-500 text-white px-2 py-1 rounded-full text-center bg-opacity-50">
+                          <div
+                            className={`text-white px-2 py-1 rounded-full text-center bg-opacity-50 ${
+                              item.kondisi === 'new'
+                                ? 'bg-emerald-500'
+                                : item.kondisi === 'active'
+                                ? 'bg-sky-500'
+                                : 'bg-green-600'
+                            }`}
+                          >
                             {item.kondisi}
                           </div>
                         </td>
@@ -241,9 +253,11 @@ export default function CardAddNas(props) {
                             >
                               Delete
                             </div>
-                            <div className="cursor-pointer hover:scale-105 w-max px-4 py-1 bg-cyan-500 rounded-lg">
-                              Detail
-                            </div>
+                            <Link to={/detailnas/ + item.id}>
+                              <div className="cursor-pointer hover:scale-105 w-max px-4 py-1 bg-cyan-500 rounded-lg">
+                                Detail
+                              </div>
+                            </Link>
                           </div>
                         </td>
                       </tr>
