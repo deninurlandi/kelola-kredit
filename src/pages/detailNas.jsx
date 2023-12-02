@@ -1,7 +1,10 @@
+import { useParams } from 'react-router-dom';
+import CardDetailNas from '../componen/fragment/cardDetailNas';
 import NavLeft from '../componen/fragment/navleft';
-import Dashboard from '../componen/fragment/dashboard';
 
-export default function HomeBeta() {
+export default function DetailNas() {
+  const { id } = useParams();
+  const parsedId = parseInt(id);
   return (
     <>
       <div className="flex relative">
@@ -9,7 +12,7 @@ export default function HomeBeta() {
           <NavLeft />
         </div>
         <div className="w-full h-screen bg-[#211545] overflow-y-auto">
-          <Dashboard />
+          <CardDetailNas id={parsedId} />
         </div>
         <div className="w-[300px] h-screen hidden xl:block bg-[#211545]"></div>
       </div>

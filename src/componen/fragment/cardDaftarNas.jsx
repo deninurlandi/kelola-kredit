@@ -1,4 +1,11 @@
-export default function CardDaftarNas() {
+/* eslint-disable react/prop-types */
+import { useContext } from 'react';
+import { DataUser } from '../../context/dataUser';
+import { Link } from 'react-router-dom';
+
+export default function CardDaftarNas(props) {
+  const { all, baru, priceNew, aktif, lunas, onDelete } = props;
+  const { data } = useContext(DataUser);
   return (
     <>
       <div className="w-full p-4 bg-[#211545] font-[Electrolize] text-white">
@@ -106,7 +113,7 @@ export default function CardDaftarNas() {
               {/* kotak1 */}
               <div className="w-1/2 p-3 bg-slate-600 rounded-md flex flex-col gap-5 justify-between ">
                 <div className="flex justify-between items-center">
-                  <p>Active</p>
+                  <p>All</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -123,10 +130,10 @@ export default function CardDaftarNas() {
                 </div>
                 <div>
                   <p className="text-3xl">
-                    20 <span className="text-base">(People)</span>
+                    {all} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
-                    <p>+ Rp. 5.000.000</p>
+                    <p>+ Rp. -</p>
                   </div>
                 </div>
                 <div>
@@ -150,7 +157,7 @@ export default function CardDaftarNas() {
               {/* kotak2 */}
               <div className="w-1/2 p-3 bg-slate-600 rounded-md flex flex-col gap-5 justify-between">
                 <div className="flex justify-between items-center">
-                  <p>Lunas</p>
+                  <p>New</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -167,10 +174,16 @@ export default function CardDaftarNas() {
                 </div>
                 <div>
                   <p className="text-3xl">
-                    5 <span className="text-base">(People)</span>
+                    {baru} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
-                    <p>+ Rp. 5.000.000</p>
+                    <p>
+                      - Rp.{' '}
+                      {priceNew.toLocaleString('id-ID', {
+                        styles: 'currency',
+                        currency: 'IDR',
+                      })}
+                    </p>
                   </div>
                 </div>
                 <div>
@@ -196,7 +209,7 @@ export default function CardDaftarNas() {
               {/* kotak3 */}
               <div className="w-1/2 p-3 bg-slate-600 rounded-md flex flex-col gap-5 justify-between">
                 <div className="flex justify-between items-center">
-                  <p>Baru</p>
+                  <p>Active</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -213,10 +226,10 @@ export default function CardDaftarNas() {
                 </div>
                 <div>
                   <p className="text-3xl">
-                    2 <span className="text-base">(People)</span>
+                    {aktif} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
-                    <p>- Rp. 2.000.000</p>
+                    <p>- Rp. -</p>
                   </div>
                 </div>
                 <div>
@@ -240,7 +253,7 @@ export default function CardDaftarNas() {
               {/* kotak4 */}
               <div className="w-1/2 p-3 bg-slate-600 rounded-md flex flex-col gap-5 justify-between">
                 <div className="flex justify-between items-center">
-                  <p>Macet</p>
+                  <p>Lunas</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -257,7 +270,7 @@ export default function CardDaftarNas() {
                 </div>
                 <div>
                   <p className="text-3xl">
-                    1 <span className="text-base">(People)</span>
+                    {lunas} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
                     <p>+ Rp. 1 .000.000</p>
@@ -383,89 +396,65 @@ export default function CardDaftarNas() {
                 <td className="py-3 text-center">Pinjaman</td>
                 <td className="py-3 text-center">Bunga</td>
                 <td className="py-3 text-center">Sisa angsuran</td>
+                <td className="py-3 text-center">Action</td>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b">
-                <td className="py-3">
-                  <div className="flex gap-2 items-center">
-                    <div className="w-10 h-10 bg-white border-2 border-slate-950 rounded-full"></div>
-                    <div>
-                      <p className="text-lg leading-6">Prabowo S</p>
-                      <p className="text-sm leading-3">123456789</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="py-3">
-                  <div className="bg-emerald-500 text-white px-2 py-1 rounded-full text-center bg-opacity-60">
-                    Active
-                  </div>
-                </td>
-                <td className="text-sm text-center">12-10-2023</td>
-                <td className="text-center">Rp. 500.000</td>
-                <td className="text-center">20 %</td>
-                <td className="text-center">Rp. 150.000</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3">
-                  <div className="flex gap-2 items-center">
-                    <div className="w-10 h-10 bg-white border-2 border-slate-950 rounded-full"></div>
-                    <div>
-                      <p className="text-lg leading-6">Prabowo S</p>
-                      <p className="text-sm leading-3">123456789</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="py-3">
-                  <div className="bg-emerald-500 text-white px-2 py-1 rounded-full text-center bg-opacity-60">
-                    Active
-                  </div>
-                </td>
-                <td className="text-sm text-center">12-10-2023</td>
-                <td className="text-center">Rp. 500.000</td>
-                <td className="text-center">20 %</td>
-                <td className="text-center">Rp. 150.000</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3">
-                  <div className="flex gap-2 items-center">
-                    <div className="w-10 h-10 bg-white border-2 border-slate-950 rounded-full"></div>
-                    <div>
-                      <p className="text-lg leading-6">Prabowo S</p>
-                      <p className="text-sm leading-3">123456789</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="py-3">
-                  <div className="bg-emerald-500 text-white px-2 py-1 rounded-full text-center bg-opacity-60">
-                    Active
-                  </div>
-                </td>
-                <td className="text-sm text-center">12-10-2023</td>
-                <td className="text-center">Rp. 500.000</td>
-                <td className="text-center">20 %</td>
-                <td className="text-center">Rp. 150.000</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3">
-                  <div className="flex gap-2 items-center">
-                    <div className="w-10 h-10 bg-white border-2 border-slate-950 rounded-full"></div>
-                    <div>
-                      <p className="text-lg leading-6">Prabowo S</p>
-                      <p className="text-sm leading-3">123456789</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="py-3">
-                  <div className="bg-emerald-500 text-white px-2 py-1 rounded-full text-center bg-opacity-60">
-                    Active
-                  </div>
-                </td>
-                <td className="text-sm text-center">12-10-2023</td>
-                <td className="text-center">Rp. 500.000</td>
-                <td className="text-center">20 %</td>
-                <td className="text-center">Rp. 150.000</td>
-              </tr>
+              {data.map((item, index) => {
+                return (
+                  <tr className="border-b" key={index}>
+                    <td className="py-3">
+                      <div className="flex gap-2 items-center">
+                        <div className="w-10 h-10 bg-white border-2 border-slate-950 rounded-full"></div>
+                        <div>
+                          <p className="text-lg capitalize leading-6">
+                            {item.nama}
+                          </p>
+                          <p className="text-sm leading-3">{item.noJaminan}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-3">
+                      <div className="bg-orange-500 text-white px-2 py-1 rounded-full text-center bg-opacity-50">
+                        {item.kondisi}
+                      </div>
+                    </td>
+                    <td className="text-sm text-center">{item.tanggal}</td>
+                    <td className="text-center">
+                      Rp.{' '}
+                      {item.pinjaman.toLocaleString('id-ID', {
+                        styles: 'currency',
+                        currency: 'IDR',
+                      })}
+                    </td>
+                    <td className="text-center">{item.bunga} %</td>
+                    <td className="text-center">
+                      Rp.{' '}
+                      {item.detail[
+                        item.detail.length - 1
+                      ].jmlPinjaman.toLocaleString('id-ID', {
+                        styles: 'currency',
+                        currency: 'IDR',
+                      })}
+                    </td>
+                    <td>
+                      <div className="flex gap-2 items-center justify-center">
+                        <div
+                          onClick={() => onDelete(item.id)}
+                          className="cursor-pointer hover:scale-105 w-max px-4 py-1 bg-red-500 rounded-lg"
+                        >
+                          Delete
+                        </div>
+                        <Link to={/detailnas/ + item.id}>
+                          <div className="cursor-pointer hover:scale-105 w-max px-4 py-1 bg-cyan-500 rounded-lg">
+                            Detail
+                          </div>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

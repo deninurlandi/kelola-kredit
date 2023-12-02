@@ -8,10 +8,12 @@ import DataUserContextProvider from './context/dataUser.jsx';
 import AddUser from './pages/formAddUser.jsx';
 import Nasabah from './pages/daftar nasabah.jsx';
 import DetailUser from './pages/detailUser.jsx';
-import NavLeft from './componen/fragment/navleft.jsx';
-import Dashboard from './componen/fragment/dashboard.jsx';
 import HomeBeta from './pages/homebeta.jsx';
 import DaftarNasBeta from './pages/daftarNasBeta.jsx';
+
+import AddNasabah from './pages/addNasabah.jsx';
+import CardDetailNas from './componen/fragment/cardDetailNas.jsx';
+import DetailNas from './pages/detailNas.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,12 +33,16 @@ const router = createBrowserRouter([
     element: <DetailUser />,
   },
   {
-    path: '/navbar',
-    element: <NavLeft />,
+    path: '/addnasabah',
+    element: <AddNasabah />,
   },
   {
     path: '/daftarNasBeta',
     element: <DaftarNasBeta />,
+  },
+  {
+    path: '/detailnas/:id',
+    element: <DetailNas />,
   },
   {
     path: '/homeBeta',

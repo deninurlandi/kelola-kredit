@@ -48,20 +48,22 @@ export default function NavLeft() {
                 <h2 className="text-white text-base">Daftar Nasabah</h2>
               </div>
             </Link>
-            <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="Layer_1"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                className="w-5 fill-white"
-              >
-                <circle cx="9" cy="6" r="6" />
-                <path d="M13.043,14H4.957A4.963,4.963,0,0,0,0,18.957V24H18V18.957A4.963,4.963,0,0,0,13.043,14Z" />
-                <polygon points="21 10 21 7 19 7 19 10 16 10 16 12 19 12 19 15 21 15 21 12 24 12 24 10 21 10" />
-              </svg>
-              <h2 className="text-white text-base">Tambah Nasabah</h2>
-            </div>
+            <Link to={'/addnasabah'}>
+              <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="Layer_1"
+                  data-name="Layer 1"
+                  viewBox="0 0 24 24"
+                  className="w-5 fill-white"
+                >
+                  <circle cx="9" cy="6" r="6" />
+                  <path d="M13.043,14H4.957A4.963,4.963,0,0,0,0,18.957V24H18V18.957A4.963,4.963,0,0,0,13.043,14Z" />
+                  <polygon points="21 10 21 7 19 7 19 10 16 10 16 12 19 12 19 15 21 15 21 12 24 12 24 10 21 10" />
+                </svg>
+                <h2 className="text-white text-base">Tambah Nasabah</h2>
+              </div>
+            </Link>
             <div className="px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
