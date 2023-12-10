@@ -2,12 +2,17 @@ import NavLeft from '../componen/fragment/navleft';
 import CardDaftarNas from '../componen/fragment/cardDaftarNas';
 import { useContext, useEffect, useState } from 'react';
 import { DataUser } from '../context/dataUser';
+import { SliderNav } from '../context/slidenav';
 
 export default function DaftarNasBeta() {
-  const { data, setData } = useContext(DataUser);
+  const { slider } = useContext(SliderNav);
+  const { data } = useContext(DataUser);
   const [all, setAll] = useState(0);
   const [baru, setBaru] = useState(0);
   const [priceNew, setPriceNew] = useState(0);
+  const [priceLunas, setPriceLunas] = useState(0);
+  const [priceActive, setPriceActive] = useState(0);
+  const [priceAll, setPriceAll] = useState(0);
   const [aktif, setAktif] = useState(0);
   const [lunas, setLunas] = useState(0);
   useEffect(() => {
@@ -18,19 +23,32 @@ export default function DaftarNasBeta() {
     setLunas(filterLunas.length);
     setBaru(filterNew.length);
     setAktif(filterAktif.length);
-    setPriceNew(filterNew.reduce((a, b) => a + b.pinjaman, 0));
+    setPriceActive(
+      filterAktif.reduce(
+        (a, b) => a + (-b.pinjaman + b.detail.reduce((a, b) => a + b.bayar, 0)),
+        0,
+      ),
+    );
+    setPriceLunas(
+      filterLunas.reduce(
+        (a, b) => a + (-b.pinjaman + b.detail.reduce((a, b) => a + b.bayar, 0)),
+        0,
+      ),
+    );
+    setPriceNew(filterNew.reduce((a, b) => a - b.pinjaman, 0));
   }, [data]);
-
-  function handleDelete(id) {
-    const newData = data.filter((item) => item.id !== id);
-    setData(newData);
-    localStorage.setItem('data', JSON.stringify(newData));
-  }
+  useEffect(() => {
+    setPriceAll(priceNew + priceLunas + priceActive);
+  }, [data, priceNew, priceLunas, priceActive]);
 
   return (
     <>
       <div className="flex relative">
-        <div className="h-screen absolute -left-[197px] transition-all duration-500 md:static">
+        <div
+          className={`${
+            slider ? 'left-0' : '-left-[225px]'
+          } h-screen absolute z-[99] transition-all duration-500 md:static`}
+        >
           <NavLeft />
         </div>
         <div className="w-full h-screen bg-[#211545] overflow-y-auto">
@@ -40,7 +58,9 @@ export default function DaftarNasBeta() {
             priceNew={priceNew}
             aktif={aktif}
             lunas={lunas}
-            onDelete={handleDelete}
+            priceAll={priceAll}
+            priceLunas={priceLunas}
+            priceActive={priceActive}
           />
         </div>
         <div className="w-[300px] h-screen hidden xl:block bg-[#211545]"></div>

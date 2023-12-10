@@ -8,6 +8,7 @@ import HomeBeta from './pages/homebeta.jsx';
 import DaftarNasBeta from './pages/daftarNasBeta.jsx';
 import AddNasabah from './pages/addNasabah.jsx';
 import DetailNas from './pages/detailNas.jsx';
+import SliderNavbarProvider from './context/slidenav.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <DataUserContextProvider>
-      <RouterProvider router={router} />
+      <SliderNavbarProvider>
+        <RouterProvider router={router} />
+      </SliderNavbarProvider>
     </DataUserContextProvider>
   </React.StrictMode>,
 );

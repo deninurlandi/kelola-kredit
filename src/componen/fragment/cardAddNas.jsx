@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import { DataUser } from '../../context/dataUser';
 import { Link } from 'react-router-dom';
 
-export default function CardAddNas(props) {
-  const { onDelete } = props;
+export default function CardAddNas() {
   const { data, setData } = useContext(DataUser);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [nama, setNama] = useState('');
   const [pinjaman, setPinjaman] = useState('');
@@ -14,7 +14,18 @@ export default function CardAddNas(props) {
   const [atention, setAtention] = useState(false);
   const [jaminan, setJaminan] = useState('ktp');
   const [noJaminan, setNoJaminan] = useState('');
+  const [idNas, setIdNas] = useState(0);
+  function handleIdNas(id) {
+    setIsOpen(!isOpen);
+    setIdNas(id);
+  }
 
+  function handleDelete(id) {
+    const newData = data.filter((item) => item.id !== id);
+    setData(newData);
+    setIsOpen(!isOpen);
+    localStorage.setItem('data', JSON.stringify(newData));
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nama && pinjaman && bunga && tanggal) {
@@ -27,7 +38,7 @@ export default function CardAddNas(props) {
         ...data,
         {
           nama,
-          id: data.length + 1,
+          id: new Date().getTime(),
           pinjaman,
           tanggal,
           jaminan,
@@ -41,7 +52,7 @@ export default function CardAddNas(props) {
                 m > 12 ? y + 1 + '-' + 1 + '-' + d : y + '-' + m + '-' + d,
               bunga,
               bayar: '',
-              pinjaman,
+              pokok: pinjaman,
               jmlBunga: (pinjaman * bunga) / 100,
               jmlPinjaman: pinjaman + (pinjaman * bunga) / 100,
             },
@@ -248,7 +259,7 @@ export default function CardAddNas(props) {
                         <td className="">
                           <div className="flex gap-2 justify-center">
                             <div
-                              onClick={() => onDelete(item.id)}
+                              onClick={() => handleIdNas(item.id)}
                               className="cursor-pointer hover:scale-105 w-max px-4 py-1 bg-red-500 rounded-lg"
                             >
                               Delete
@@ -265,6 +276,30 @@ export default function CardAddNas(props) {
                   })}
                 </tbody>
               </table>
+              {isOpen && (
+                <div className="fixed bg-slate-300 bg-opacity-80 inset-0">
+                  <div className="w-full h-screen flex justify-center items-center">
+                    <div className="p-4 text-xl text-white bg-slate-700 rounded-md shadow">
+                      <h2>Apakah anda yakin mau menghapusnya? </h2>
+                      <div className="flex gap-3 mt-3">
+                        <button
+                          onClick={() => setIsOpen(!isOpen)}
+                          type="button"
+                          className="hover:scale-105 w-1/2 tracking-wider py-2 text-lg font-semibold text-white bg-sky-400 shadow rounded-md"
+                        >
+                          Batal
+                        </button>
+                        <button
+                          onClick={() => handleDelete(idNas)}
+                          className="hover:scale-105 w-1/2 tracking-wider py-2 text-lg font-semibold text-white bg-red-400 shadow rounded-md"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

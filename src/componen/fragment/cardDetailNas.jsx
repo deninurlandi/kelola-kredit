@@ -40,8 +40,9 @@ export default function CardDetailNas(props) {
       if (jmlnow > 0) {
         user.detail.push({
           tanggalTempo: tanggal,
+          bayar: 0,
           bunga: bunga,
-          pinjaman: jmlnow,
+          pokok: jmlnow,
           jmlBunga: (jmlnow * bunga) / 100,
           jmlPinjaman: jmlnow + (jmlnow * bunga) / 100,
         });
@@ -136,6 +137,7 @@ export default function CardDetailNas(props) {
                 <input
                   type="number"
                   id="bayar"
+                  required
                   max={batas}
                   min={batas < 200000 ? batas : 100000}
                   value={payNominal}
@@ -149,7 +151,7 @@ export default function CardDetailNas(props) {
                 />
               </div>
               <div className="mb-5">
-                <label htmlFor="tanggal">Tanggal Bayar</label>
+                <label htmlFor="tanggal">Tanggal Bayar :</label>
                 <input
                   type="date"
                   id="tanggal"
@@ -204,7 +206,7 @@ export default function CardDetailNas(props) {
                         {item.tanggalBayar}
                       </td>
                       <td className="py-3 px-1 text-center">
-                        {item.pinjaman.toLocaleString('id-ID', {
+                        {item.pokok.toLocaleString('id-ID', {
                           styles: 'currency',
                           currency: 'IDR',
                         })}

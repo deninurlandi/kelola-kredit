@@ -1,10 +1,31 @@
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { SliderNav } from '../../context/slidenav';
 
 export default function NavLeft() {
+  const { slider, setSlider } = useContext(SliderNav);
+  function handleSlider() {
+    setSlider(!slider);
+  }
   const location = useLocation();
   return (
     <>
-      <div className="w-max h-screen bg-[#24154C] opacity-90">
+      <div className="relative w-max px-4 h-screen bg-[#24154C] opacity-90">
+        <div
+          onClick={handleSlider}
+          className="cursor-pointer absolute -right-1 top-[104px]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="Outline"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            className=" fill-white scale-y-150"
+          >
+            <path d="M7,24a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42l8.17-8.17a3,3,0,0,0,0-4.24L6.29,1.71A1,1,0,0,1,7.71.29l8.17,8.17a5,5,0,0,1,0,7.08L7.71,23.71A1,1,0,0,1,7,24Z" />
+          </svg>
+        </div>
         <div className="flex flex-col h-full gap-9">
           <div className="">
             <div className="px-4 pt-7 flex gap-4 items-center">

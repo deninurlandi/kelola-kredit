@@ -2,7 +2,7 @@ export default function Dashboard() {
   return (
     <>
       <div className=" w-full flex h-screen">
-        <div className="w-full px-4 pt-3">
+        <div className="w-full px-2 pt-3">
           <h2 className="text-xl font-[Electrolize] text-white px-4">
             WELCOME TO DASHBOARD
           </h2>

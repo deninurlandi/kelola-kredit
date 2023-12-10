@@ -1,11 +1,33 @@
 /* eslint-disable react/prop-types */
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { DataUser } from '../../context/dataUser';
 import { Link } from 'react-router-dom';
 
 export default function CardDaftarNas(props) {
-  const { all, baru, priceNew, aktif, lunas, onDelete } = props;
-  const { data } = useContext(DataUser);
+  const {
+    all,
+    baru,
+    priceNew,
+    aktif,
+    priceAll,
+    lunas,
+    priceActive,
+    priceLunas,
+  } = props;
+  const { data, setData } = useContext(DataUser);
+  const [idNas, setIdNas] = useState(0);
+  function handleIdNas(id) {
+    setIsOpen(!isOpen);
+    setIdNas(id);
+  }
+
+  function handleDelete(id) {
+    const newData = data.filter((item) => item.id !== id);
+    setData(newData);
+    localStorage.setItem('data', JSON.stringify(newData));
+    setIsOpen(!isOpen);
+  }
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div className="w-full p-4 bg-[#211545] font-[Electrolize] text-white">
@@ -133,7 +155,10 @@ export default function CardDaftarNas(props) {
                     {all} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
-                    <p>+ Rp. -</p>
+                    <p>
+                      {priceAll > 0 ? '+' : ''} Rp.{' '}
+                      {priceAll.toLocaleString('id-ID')}
+                    </p>
                   </div>
                 </div>
                 <div>
@@ -178,7 +203,7 @@ export default function CardDaftarNas(props) {
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
                     <p>
-                      - Rp.{' '}
+                      Rp.{' '}
                       {priceNew.toLocaleString('id-ID', {
                         styles: 'currency',
                         currency: 'IDR',
@@ -229,7 +254,10 @@ export default function CardDaftarNas(props) {
                     {aktif} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
-                    <p>- Rp. -</p>
+                    <p>
+                      {priceActive > 0 ? '+' : ''} Rp.{' '}
+                      {priceActive.toLocaleString('id-ID')}
+                    </p>
                   </div>
                 </div>
                 <div>
@@ -273,7 +301,7 @@ export default function CardDaftarNas(props) {
                     {lunas} <span className="text-base">(People)</span>
                   </p>
                   <div className="flex gap-2 text-sm justify-start">
-                    <p>+ Rp. 1 .000.000</p>
+                    <p>+ Rp. {priceLunas.toLocaleString('id-ID')}</p>
                   </div>
                 </div>
                 <div>
@@ -450,7 +478,7 @@ export default function CardDaftarNas(props) {
                     <td>
                       <div className="flex gap-2 items-center justify-center">
                         <div
-                          onClick={() => onDelete(item.id)}
+                          onClick={() => handleIdNas(item.id)}
                           className="cursor-pointer hover:scale-105 w-max px-4 py-1 bg-red-500 rounded-lg"
                         >
                           Delete
@@ -467,6 +495,30 @@ export default function CardDaftarNas(props) {
               })}
             </tbody>
           </table>
+          {isOpen && (
+            <div className="fixed bg-slate-300 bg-opacity-80 inset-0">
+              <div className="w-full h-screen flex justify-center items-center">
+                <div className="p-4 text-xl text-white bg-slate-700 rounded-md shadow">
+                  <h2>Apakah anda yakin mau menghapusnya? </h2>
+                  <div className="flex gap-3 mt-3">
+                    <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      type="button"
+                      className="hover:scale-105 w-1/2 tracking-wider py-2 text-lg font-semibold text-white bg-sky-400 shadow rounded-md"
+                    >
+                      Batal
+                    </button>
+                    <button
+                      onClick={() => handleDelete(idNas)}
+                      className="hover:scale-105 w-1/2 tracking-wider py-2 text-lg font-semibold text-white bg-red-400 shadow rounded-md"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
