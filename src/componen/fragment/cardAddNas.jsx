@@ -82,8 +82,8 @@ export default function CardAddNas() {
     <>
       <div className="w-full p-4 bg-[#211545] font-[Electrolize] text-white">
         <h2 className="text-xl">Form Add Nasabah</h2>
-        <div className="w-full flex gap-4">
-          <div className="bg-slate-600 w-full max-w-sm p-4 rounded-md">
+        <div className="w-full flex gap-4 flex-wrap sm:flex-nowrap">
+          <div className="bg-slate-600 w-full sm:max-w-sm p-4 rounded-md">
             <form action="" className=" w-full" onSubmit={handleSubmit}>
               <div className="flex flex-col mb-4">
                 <label htmlFor="nama">Nama :</label>

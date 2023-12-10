@@ -129,8 +129,8 @@ export default function CardDaftarNas(props) {
             </div>
           </div>
         </div>
-        <div className="w-full flex gap-3">
-          <div className="w-1/2 flex flex-wrap gap-3">
+        <div className="w-full flex gap-3 flex-wrap sm:flex-nowrap">
+          <div className="sm:w-1/2 w-full flex flex-wrap gap-3">
             <div className="w-full flex gap-3">
               {/* kotak1 */}
               <div className="w-1/2 p-3 bg-slate-600 rounded-md flex flex-col gap-5 justify-between ">
@@ -324,7 +324,7 @@ export default function CardDaftarNas(props) {
               {/* akhir kotak4 */}
             </div>
           </div>
-          <div className="w-1/2 bg-slate-600 rounded-md p-3 overflow-hidden">
+          <div className="sm:w-1/2 w-full bg-slate-600 rounded-md p-3 overflow-hidden">
             <div className="pb-3 flex justify-between items-center">
               <h2 className="text-lg">Grafik</h2>
               <div className="flex items-center gap-1 bg-slate-700 px-1 rounded-md w-max">

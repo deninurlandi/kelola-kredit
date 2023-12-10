@@ -1,10 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SliderNav } from '../../context/slidenav';
 
 export default function NavLeft() {
+  const buttonSlider = useRef();
   const { slider, setSlider } = useContext(SliderNav);
   function handleSlider() {
+    setSlider(!slider);
+  }
+  function handleHome() {
     setSlider(!slider);
   }
   const location = useLocation();
@@ -12,7 +16,9 @@ export default function NavLeft() {
     <>
       <div className="relative w-max px-4 h-screen bg-[#24154C] opacity-90">
         <div
+          ref={buttonSlider}
           onClick={handleSlider}
+          id="slider"
           className="cursor-pointer absolute -right-1 top-[104px]"
         >
           <svg
@@ -42,7 +48,7 @@ export default function NavLeft() {
             </div>
           </div>
           <div className=" flex flex-col gap-3">
-            <Link to={'/'}>
+            <Link to={'/'} onClick={handleHome}>
               <div
                 className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
                   location.pathname === '/' && 'bg-[#2e1e5b]'
@@ -60,7 +66,7 @@ export default function NavLeft() {
                 <h2 className="text-white text-base">Dashboard</h2>
               </div>
             </Link>
-            <Link to={'/daftarnasabah'}>
+            <Link to={'/daftarnasabah'} onClick={() => setSlider(!slider)}>
               <div
                 className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
                   location.pathname === '/daftarnasabah' && 'bg-[#2e1e5b]'
@@ -78,7 +84,7 @@ export default function NavLeft() {
                 <h2 className="text-white text-base">Daftar Nasabah</h2>
               </div>
             </Link>
-            <Link to={'/addnasabah'}>
+            <Link to={'/addnasabah'} onClick={() => setSlider(!slider)}>
               <div
                 className={`px-4 py-2 flex gap-3 items-center hover:bg-[#2e1e5b] ${
                   location.pathname === '/addnasabah' && 'bg-[#2e1e5b]'
