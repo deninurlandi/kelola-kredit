@@ -74,7 +74,7 @@ export default function CardDetailNas(props) {
   return (
     <>
       <div className="p-4 w-full bg-[#211545] text-white font-[Electrolize]">
-        <div className="w-full flex gap-4">
+        <div className="w-full flex gap-4 flex-wrap sm:flex-nowrap">
           <div className="w-full p-4 bg-slate-600 rounded-md">
             <h2 className="text-lg mb-3">Data Nasabah</h2>
 
@@ -121,7 +121,7 @@ export default function CardDetailNas(props) {
               </tbody>
             </table>
           </div>
-          <div className="w-full max-w-md p-4 bg-slate-600 rounded-md">
+          <div className="w-full sm:max-w-md p-4 bg-slate-600 rounded-md">
             <p className="px-3 py-1 mb-4 w-max rounded-sm bg-slate-400">
               {sisa === 0
                 ? 'Pinjaman Lunas'
