@@ -93,10 +93,8 @@ export default function CardDaftarNas(props) {
         <hr className="border-slate-500" />
         <div className="flex justify-between items-center py-6">
           <div className="">
-            <h2 className="text-2xl">Daftar Nasabah</h2>
-            <p className="text-sm leading-[5px]">
-              Here you can see the list of all users
-            </p>
+            <h2 className="text-2xl leading-3">Daftar Nasabah</h2>
+            <p className="text-sm">Here you can see the list of all users</p>
           </div>
           <div className="flex gap-3">
             <div className="flex gap-2 items-center bg-slate-600 px-2 rounded-md">
